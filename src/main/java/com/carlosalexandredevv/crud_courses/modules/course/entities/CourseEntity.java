@@ -1,0 +1,37 @@
+package com.carlosalexandredevv.crud_courses.modules.course.entities;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Data
+@Entity(name = "course")
+public class CourseEntity {
+    
+    @Id
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
+
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String category;
+
+    @NotNull
+    private Boolean active;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+}
