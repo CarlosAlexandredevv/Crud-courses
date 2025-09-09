@@ -6,7 +6,9 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +16,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
 @Entity(name = "course")
+@AllArgsConstructor
+@NoArgsConstructor
 public class CourseEntity {
     
     @Id

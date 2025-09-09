@@ -7,22 +7,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CreateCourseDTO;
 import com.carlosalexandredevv.crud_courses.modules.course.entities.CourseEntity;
+import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CreateCourseMapper;
 import com.carlosalexandredevv.crud_courses.shared.MessageResponseDTO;
 import com.carlosalexandredevv.crud_courses.modules.course.repositories.CourseRepository;
 
 @Service
-public class CreateCourse {
+public class CreateCourseUseCase {
 
     @Autowired
     private CourseRepository courseRepository;
     
     public MessageResponseDTO execute(CreateCourseDTO createCourseDTO) {
         try {
-            CourseEntity entity = new CourseEntity();
-            entity.setName(createCourseDTO.getName());
-            entity.setCategory(createCourseDTO.getCategory());
-            entity.setActive(createCourseDTO.getActive());
-
+            CourseEntity entity = CreateCourseMapper.toEntity(createCourseDTO);
             courseRepository.save(entity);
             return new MessageResponseDTO("Course created successfully");
         } catch (Exception e) {

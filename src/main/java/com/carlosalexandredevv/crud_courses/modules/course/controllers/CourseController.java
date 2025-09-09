@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CreateCourseDTO;
-import com.carlosalexandredevv.crud_courses.modules.course.useCases.CreateCourse;
+import com.carlosalexandredevv.crud_courses.modules.course.useCases.CreateCourseUseCase;
 import com.carlosalexandredevv.crud_courses.shared.MessageResponseDTO;
 
 @RestController
@@ -17,7 +17,7 @@ import com.carlosalexandredevv.crud_courses.shared.MessageResponseDTO;
 public class CourseController {
 
     @Autowired
-    private CreateCourse createCourse;
+    private CreateCourseUseCase createCourse;
 
     @PostMapping
     public ResponseEntity<MessageResponseDTO> createCourse(@RequestBody @Valid CreateCourseDTO createCourseDTO) {
