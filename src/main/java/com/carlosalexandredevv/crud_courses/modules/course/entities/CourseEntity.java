@@ -20,13 +20,13 @@ public class CourseEntity {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @NotBlank
+    @NotBlank(message = "Name is required")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Category is required")
     private String category;
 
-    @NotNull
+    @NotNull(message = "Active is required")
     private Boolean active;
 
     @CreationTimestamp
