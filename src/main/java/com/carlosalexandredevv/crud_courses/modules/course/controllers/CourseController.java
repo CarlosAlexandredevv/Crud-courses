@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import java.util.UUID;
 import com.carlosalexandredevv.crud_courses.modules.course.DTOs.UpdateCourseDTO;
 import com.carlosalexandredevv.crud_courses.modules.course.useCases.UpdateCourseByIdUseCase;
 import com.carlosalexandredevv.crud_courses.modules.course.useCases.DeleteCourseByIdUseCase;
+import com.carlosalexandredevv.crud_courses.modules.course.useCases.ActiveCourseUseCase;
 
 @RestController
 @RequestMapping("/courses")
@@ -39,6 +41,9 @@ public class CourseController {
 
     @Autowired
     private DeleteCourseByIdUseCase deleteCourseById;
+
+    @Autowired
+    private ActiveCourseUseCase activeCourseById;
 
     @PostMapping
     public ResponseEntity<MessageResponseDTO> createCourse(@RequestBody @Valid CreateCourseDTO createCourseDTO) {
@@ -58,5 +63,10 @@ public class CourseController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDTO> deleteCourseById(@PathVariable UUID id) {
         return ResponseEntity.ok(deleteCourseById.execute(id));
+    }
+
+    @PatchMapping("/{id}/active")
+    public ResponseEntity<MessageResponseDTO> activeCourseById(@PathVariable UUID id) {
+        return ResponseEntity.ok(activeCourseById.execute(id));
     }
 }
