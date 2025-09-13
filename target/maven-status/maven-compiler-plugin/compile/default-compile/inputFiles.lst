@@ -1,0 +1,17 @@
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/CrudCoursesApplication.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/config/SwaggerConfig.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/exceptions/ErrorHandler.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/DTOs/CreateCourseDTO.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/DTOs/CreateCourseMapper.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/DTOs/UpdateCourseDTO.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/DTOs/UpdateCourseMapper.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/controllers/CourseController.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/entities/CourseEntity.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/repositories/CourseRepository.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/useCases/ActiveCourseUseCase.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/useCases/CreateCourseUseCase.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/useCases/DeleteCourseByIdUseCase.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/useCases/ListCoursesUseCase.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/modules/course/useCases/UpdateCourseByIdUseCase.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/shared/ErrorMessageDTO.java
+/home/carlos-alexandre/Documentos/GitHub/Crud-courses/src/main/java/com/carlosalexandredevv/crud_courses/shared/MessageResponseDTO.java

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.carlosalexandredevv.crud_courses.modules.course.useCases.ListCoursesUseCaseTest$WhenNoFilters
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.carlosalexandredevv.crud_courses.modules.course.useCases.ListCoursesUseCaseTest$WhenNoFilters
