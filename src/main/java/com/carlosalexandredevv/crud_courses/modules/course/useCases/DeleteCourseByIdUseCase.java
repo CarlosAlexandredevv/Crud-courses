@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.carlosalexandredevv.crud_courses.modules.course.entities.CourseEntity;
 import com.carlosalexandredevv.crud_courses.modules.course.repositories.CourseRepository;
 import com.carlosalexandredevv.crud_courses.shared.MessageResponseDTO;
 
