@@ -1,7 +1,5 @@
 package com.carlosalexandredevv.crud_courses.modules.course.DTOs;
 
-import com.carlosalexandredevv.crud_courses.modules.course.entities.CourseEntity;
-
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
