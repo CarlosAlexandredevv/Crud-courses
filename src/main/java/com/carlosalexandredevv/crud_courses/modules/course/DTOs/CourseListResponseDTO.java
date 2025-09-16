@@ -13,13 +13,13 @@ public class CourseListResponseDTO {
     
     private List<CourseEntity> courses;
     private int total;
-    private int ativo;
-    private int inativo;
+    private int active;
+    private int inactive;
     
     public CourseListResponseDTO(List<CourseEntity> courses) {
         this.courses = courses;
         this.total = courses.size();
-        this.ativo = (int) courses.stream().filter(course -> course.getActive()).count();
-        this.inativo = (int) courses.stream().filter(course -> !course.getActive()).count();
+        this.active = (int) courses.stream().filter(course -> course.getActive()).count();
+        this.inactive = (int) courses.stream().filter(course -> !course.getActive()).count();
     }
 }

@@ -66,8 +66,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertEquals(3, result.getCourses().size(), "Deve retornar 3 cursos");
             assertEquals(3, result.getTotal(), "Total deve ser 3");
-            assertEquals(2, result.getAtivo(), "Deve ter 2 cursos ativos");
-            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
+            assertEquals(2, result.getActive(), "Deve ter 2 cursos ativos");
+            assertEquals(1, result.getInactive(), "Deve ter 1 curso inativo");
             assertTrue(result.getCourses().containsAll(expectedCourses), "Deve conter todos os cursos esperados");
             verify(courseRepository).findAll();
             verify(courseRepository, never()).findByNameContainingIgnoreCase(any());
@@ -93,8 +93,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertEquals(1, result.getCourses().size(), "Deve retornar 1 curso");
             assertEquals(1, result.getTotal(), "Total deve ser 1");
-            assertEquals(1, result.getAtivo(), "Deve ter 1 curso ativo");
-            assertEquals(0, result.getInativo(), "Deve ter 0 cursos inativos");
+            assertEquals(1, result.getActive(), "Deve ter 1 curso ativo");
+            assertEquals(0, result.getInactive(), "Deve ter 0 cursos inativos");
             assertEquals("Java Básico", result.getCourses().get(0).getName(), "Deve retornar o curso Java Básico");
             verify(courseRepository).findByNameContainingIgnoreCase(nameFilter);
             verify(courseRepository, never()).findAll();
@@ -112,8 +112,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertTrue(result.getCourses().isEmpty(), "Deve retornar lista vazia");
             assertEquals(0, result.getTotal(), "Total deve ser 0");
-            assertEquals(0, result.getAtivo(), "Deve ter 0 cursos ativos");
-            assertEquals(0, result.getInativo(), "Deve ter 0 cursos inativos");
+            assertEquals(0, result.getActive(), "Deve ter 0 cursos ativos");
+            assertEquals(0, result.getInactive(), "Deve ter 0 cursos inativos");
             verify(courseRepository).findByNameContainingIgnoreCase(nameFilter);
         }
     }
@@ -135,8 +135,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertEquals(2, result.getCourses().size(), "Deve retornar 2 cursos");
             assertEquals(2, result.getTotal(), "Total deve ser 2");
-            assertEquals(1, result.getAtivo(), "Deve ter 1 curso ativo");
-            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
+            assertEquals(1, result.getActive(), "Deve ter 1 curso ativo");
+            assertEquals(1, result.getInactive(), "Deve ter 1 curso inativo");
             assertTrue(result.getCourses().stream().allMatch(course -> "Programação".equals(course.getCategory())), 
                 "Todos os cursos devem ser da categoria Programação");
             verify(courseRepository).findByCategoryContainingIgnoreCase(categoryFilter);
@@ -163,8 +163,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertEquals(1, result.getCourses().size(), "Deve retornar 1 curso");
             assertEquals(1, result.getTotal(), "Total deve ser 1");
-            assertEquals(1, result.getAtivo(), "Deve ter 1 curso ativo");
-            assertEquals(0, result.getInativo(), "Deve ter 0 cursos inativos");
+            assertEquals(1, result.getActive(), "Deve ter 1 curso ativo");
+            assertEquals(0, result.getInactive(), "Deve ter 0 cursos inativos");
             assertEquals("Java Básico", result.getCourses().get(0).getName(), "Deve retornar o curso Java Básico");
             assertEquals("Programação", result.getCourses().get(0).getCategory(), "Deve ser da categoria Programação");
             verify(courseRepository).findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(nameFilter, categoryFilter);
@@ -188,8 +188,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertEquals(3, result.getCourses().size(), "Deve retornar 3 cursos");
             assertEquals(3, result.getTotal(), "Total deve ser 3");
-            assertEquals(2, result.getAtivo(), "Deve ter 2 cursos ativos");
-            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
+            assertEquals(2, result.getActive(), "Deve ter 2 cursos ativos");
+            assertEquals(1, result.getInactive(), "Deve ter 1 curso inativo");
             verify(courseRepository).findAll();
         }
         
@@ -205,8 +205,8 @@ class ListCoursesUseCaseTest {
             assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
             assertEquals(3, result.getCourses().size(), "Deve retornar 3 cursos");
             assertEquals(3, result.getTotal(), "Total deve ser 3");
-            assertEquals(2, result.getAtivo(), "Deve ter 2 cursos ativos");
-            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
+            assertEquals(2, result.getActive(), "Deve ter 2 cursos ativos");
+            assertEquals(1, result.getInactive(), "Deve ter 1 curso inativo");
             verify(courseRepository).findAll();
         }
     }
