@@ -69,8 +69,13 @@ public class CourseController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CourseListResponseDTO.class))),
     })
-    public ResponseEntity<CourseListResponseDTO> listCourses(@RequestParam(required = false) String name, @RequestParam(required = false) String category) {
-        return ResponseEntity.ok(listCourses.execute(name, category));
+    public ResponseEntity<CourseListResponseDTO> listCourses(
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String category,
+        @RequestParam(required = false, defaultValue = "1") int page,
+        @RequestParam(required = false, defaultValue = "5") int limit
+    ) {
+        return ResponseEntity.ok(listCourses.execute(name, category, page, limit));
     }
 
     
