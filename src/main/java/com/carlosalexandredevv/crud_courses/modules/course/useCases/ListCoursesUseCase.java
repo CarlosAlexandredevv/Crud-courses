@@ -32,8 +32,8 @@ public class ListCoursesUseCase {
         }
 
         int safeLimit = limit > 0 ? limit : 5;
-        int totalAll = allCourses.size();
-        int totalPages = safeLimit == 0 ? 0 : (int) Math.ceil((double) totalAll / safeLimit);
+        int totalItems = allCourses.size();
+        int totalPages = safeLimit == 0 ? 0 : (int) Math.ceil((double) totalItems / safeLimit);
 
         int safePage = page < 1 ? 1 : page;
         if (totalPages > 0 && safePage > totalPages) {
@@ -41,11 +41,9 @@ public class ListCoursesUseCase {
         }
 
         int startIndex = totalPages == 0 ? 0 : (safePage - 1) * safeLimit;
-        int endIndex = Math.min(startIndex + safeLimit, totalAll);
+        int endIndex = Math.min(startIndex + safeLimit, totalItems);
 
-        List<CourseEntity> pageItems = totalAll == 0 ? List.of() : allCourses.subList(startIndex, endIndex);
-
-        int totalItems = pageItems.size();
+        List<CourseEntity> pageItems = totalItems == 0 ? List.of() : allCourses.subList(startIndex, endIndex);
         int active = (int) pageItems.stream().filter(c -> c.getActive()).count();
         int inactive = (int) pageItems.stream().filter(c -> !c.getActive()).count();
 
@@ -54,18 +52,12 @@ public class ListCoursesUseCase {
 
         return new CourseListResponseDTO(
             pageItems,
-            totalItems,
-            totalAll,
             active,
             inactive,
             totalPages,
             hasNextPage,
-            hasPreviousPage
+            hasPreviousPage,
+            totalItems
         );
-    }
-
-
-    public CourseListResponseDTO execute(String name, String category) {
-        return execute(name, category, 1, 0);
     }
 }

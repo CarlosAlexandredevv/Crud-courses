@@ -12,16 +12,10 @@ import lombok.NoArgsConstructor;
 public class CourseListResponseDTO {
     
     private List<CourseEntity> courses;
-    private int totalItems;
-    private int totalAll;
     private int active;
     private int inactive;
     private int totalPages;
     private boolean hasNextPage;
     private boolean hasPreviousPage;
-   
-
-    public int getTotal() {
-        return this.totalAll;
-    }
+    private int totalItems;
 }
