@@ -19,16 +19,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-
 import jakarta.validation.Valid;
 
 import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CreateCourseDTO;
+import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CourseListResponseDTO;
 import com.carlosalexandredevv.crud_courses.modules.course.useCases.CreateCourseUseCase;
 import com.carlosalexandredevv.crud_courses.modules.course.useCases.ListCoursesUseCase;
 import com.carlosalexandredevv.crud_courses.shared.MessageResponseDTO;
-import com.carlosalexandredevv.crud_courses.modules.course.entities.CourseEntity;
-import java.util.List;
 import java.util.UUID;
 import com.carlosalexandredevv.crud_courses.modules.course.DTOs.UpdateCourseDTO;
 import com.carlosalexandredevv.crud_courses.modules.course.useCases.UpdateCourseByIdUseCase;
@@ -68,11 +65,11 @@ public class CourseController {
     }
 
     @GetMapping
-    @Operation(summary = "List courses", description = "List all courses")
+    @Operation(summary = "List courses", description = "List all courses with statistics")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = CourseEntity.class)))),
+        @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CourseListResponseDTO.class))),
     })
-    public ResponseEntity<List<CourseEntity>> listCourses(@RequestParam(required = false) String name, @RequestParam(required = false) String category) {
+    public ResponseEntity<CourseListResponseDTO> listCourses(@RequestParam(required = false) String name, @RequestParam(required = false) String category) {
         return ResponseEntity.ok(listCourses.execute(name, category));
     }
 

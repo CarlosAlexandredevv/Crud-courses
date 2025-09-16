@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.carlosalexandredevv.crud_courses.modules.course.entities.CourseEntity;
 import com.carlosalexandredevv.crud_courses.modules.course.repositories.CourseRepository;
+import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CourseListResponseDTO;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -59,11 +60,15 @@ class ListCoursesUseCaseTest {
             List<CourseEntity> expectedCourses = Arrays.asList(javaCourse, springCourse, javascriptCourse);
             when(courseRepository.findAll()).thenReturn(expectedCourses);
             
-            List<CourseEntity> result = listCoursesUseCase.execute(null, null);
+            CourseListResponseDTO result = listCoursesUseCase.execute(null, null);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertEquals(3, result.size(), "Deve retornar 3 cursos");
-            assertTrue(result.containsAll(expectedCourses), "Deve conter todos os cursos esperados");
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertEquals(3, result.getCourses().size(), "Deve retornar 3 cursos");
+            assertEquals(3, result.getTotal(), "Total deve ser 3");
+            assertEquals(2, result.getAtivo(), "Deve ter 2 cursos ativos");
+            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
+            assertTrue(result.getCourses().containsAll(expectedCourses), "Deve conter todos os cursos esperados");
             verify(courseRepository).findAll();
             verify(courseRepository, never()).findByNameContainingIgnoreCase(any());
             verify(courseRepository, never()).findByCategoryContainingIgnoreCase(any());
@@ -82,11 +87,15 @@ class ListCoursesUseCaseTest {
             List<CourseEntity> expectedCourses = Arrays.asList(javaCourse);
             when(courseRepository.findByNameContainingIgnoreCase(nameFilter)).thenReturn(expectedCourses);
             
-            List<CourseEntity> result = listCoursesUseCase.execute(nameFilter, null);
+            CourseListResponseDTO result = listCoursesUseCase.execute(nameFilter, null);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertEquals(1, result.size(), "Deve retornar 1 curso");
-            assertEquals("Java Básico", result.get(0).getName(), "Deve retornar o curso Java Básico");
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertEquals(1, result.getCourses().size(), "Deve retornar 1 curso");
+            assertEquals(1, result.getTotal(), "Total deve ser 1");
+            assertEquals(1, result.getAtivo(), "Deve ter 1 curso ativo");
+            assertEquals(0, result.getInativo(), "Deve ter 0 cursos inativos");
+            assertEquals("Java Básico", result.getCourses().get(0).getName(), "Deve retornar o curso Java Básico");
             verify(courseRepository).findByNameContainingIgnoreCase(nameFilter);
             verify(courseRepository, never()).findAll();
         }
@@ -97,10 +106,14 @@ class ListCoursesUseCaseTest {
             String nameFilter = "Python";
             when(courseRepository.findByNameContainingIgnoreCase(nameFilter)).thenReturn(Collections.emptyList());
             
-            List<CourseEntity> result = listCoursesUseCase.execute(nameFilter, null);
+            CourseListResponseDTO result = listCoursesUseCase.execute(nameFilter, null);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertTrue(result.isEmpty(), "Deve retornar lista vazia");
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertTrue(result.getCourses().isEmpty(), "Deve retornar lista vazia");
+            assertEquals(0, result.getTotal(), "Total deve ser 0");
+            assertEquals(0, result.getAtivo(), "Deve ter 0 cursos ativos");
+            assertEquals(0, result.getInativo(), "Deve ter 0 cursos inativos");
             verify(courseRepository).findByNameContainingIgnoreCase(nameFilter);
         }
     }
@@ -116,11 +129,15 @@ class ListCoursesUseCaseTest {
             List<CourseEntity> expectedCourses = Arrays.asList(javaCourse, javascriptCourse);
             when(courseRepository.findByCategoryContainingIgnoreCase(categoryFilter)).thenReturn(expectedCourses);
             
-            List<CourseEntity> result = listCoursesUseCase.execute(null, categoryFilter);
+            CourseListResponseDTO result = listCoursesUseCase.execute(null, categoryFilter);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertEquals(2, result.size(), "Deve retornar 2 cursos");
-            assertTrue(result.stream().allMatch(course -> "Programação".equals(course.getCategory())), 
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertEquals(2, result.getCourses().size(), "Deve retornar 2 cursos");
+            assertEquals(2, result.getTotal(), "Total deve ser 2");
+            assertEquals(1, result.getAtivo(), "Deve ter 1 curso ativo");
+            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
+            assertTrue(result.getCourses().stream().allMatch(course -> "Programação".equals(course.getCategory())), 
                 "Todos os cursos devem ser da categoria Programação");
             verify(courseRepository).findByCategoryContainingIgnoreCase(categoryFilter);
             verify(courseRepository, never()).findAll();
@@ -140,12 +157,16 @@ class ListCoursesUseCaseTest {
             when(courseRepository.findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(nameFilter, categoryFilter))
                 .thenReturn(expectedCourses);
             
-            List<CourseEntity> result = listCoursesUseCase.execute(nameFilter, categoryFilter);
+            CourseListResponseDTO result = listCoursesUseCase.execute(nameFilter, categoryFilter);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertEquals(1, result.size(), "Deve retornar 1 curso");
-            assertEquals("Java Básico", result.get(0).getName(), "Deve retornar o curso Java Básico");
-            assertEquals("Programação", result.get(0).getCategory(), "Deve ser da categoria Programação");
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertEquals(1, result.getCourses().size(), "Deve retornar 1 curso");
+            assertEquals(1, result.getTotal(), "Total deve ser 1");
+            assertEquals(1, result.getAtivo(), "Deve ter 1 curso ativo");
+            assertEquals(0, result.getInativo(), "Deve ter 0 cursos inativos");
+            assertEquals("Java Básico", result.getCourses().get(0).getName(), "Deve retornar o curso Java Básico");
+            assertEquals("Programação", result.getCourses().get(0).getCategory(), "Deve ser da categoria Programação");
             verify(courseRepository).findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(nameFilter, categoryFilter);
             verify(courseRepository, never()).findAll();
         }
@@ -161,10 +182,14 @@ class ListCoursesUseCaseTest {
             List<CourseEntity> expectedCourses = Arrays.asList(javaCourse, springCourse, javascriptCourse);
             when(courseRepository.findAll()).thenReturn(expectedCourses);
             
-            List<CourseEntity> result = listCoursesUseCase.execute("", null);
+            CourseListResponseDTO result = listCoursesUseCase.execute("", null);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertEquals(3, result.size(), "Deve retornar 3 cursos");
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertEquals(3, result.getCourses().size(), "Deve retornar 3 cursos");
+            assertEquals(3, result.getTotal(), "Total deve ser 3");
+            assertEquals(2, result.getAtivo(), "Deve ter 2 cursos ativos");
+            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
             verify(courseRepository).findAll();
         }
         
@@ -174,10 +199,14 @@ class ListCoursesUseCaseTest {
             List<CourseEntity> expectedCourses = Arrays.asList(javaCourse, springCourse, javascriptCourse);
             when(courseRepository.findAll()).thenReturn(expectedCourses);
                 
-            List<CourseEntity> result = listCoursesUseCase.execute("   ", null);
+            CourseListResponseDTO result = listCoursesUseCase.execute("   ", null);
             
             assertNotNull(result, "Resultado não deve ser nulo");
-            assertEquals(3, result.size(), "Deve retornar 3 cursos");
+            assertNotNull(result.getCourses(), "Lista de cursos não deve ser nula");
+            assertEquals(3, result.getCourses().size(), "Deve retornar 3 cursos");
+            assertEquals(3, result.getTotal(), "Total deve ser 3");
+            assertEquals(2, result.getAtivo(), "Deve ter 2 cursos ativos");
+            assertEquals(1, result.getInativo(), "Deve ter 1 curso inativo");
             verify(courseRepository).findAll();
         }
     }

@@ -3,10 +3,12 @@ package com.carlosalexandredevv.crud_courses.modules.course.useCases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.carlosalexandredevv.crud_courses.modules.course.entities.CourseEntity;
 import com.carlosalexandredevv.crud_courses.modules.course.repositories.CourseRepository;
+import com.carlosalexandredevv.crud_courses.modules.course.DTOs.CourseListResponseDTO;
 
 @Service
 public class ListCoursesUseCase {
@@ -14,22 +16,22 @@ public class ListCoursesUseCase {
     @Autowired
     private CourseRepository courseRepository;
 
-    public List<CourseEntity> execute(String name, String category) {
+    public CourseListResponseDTO execute(String name, String category) {
         boolean hasName = name != null && !name.isBlank();
         boolean hasCategory = category != null && !category.isBlank();
 
+        List<CourseEntity> courses;
+
         if (hasName && hasCategory) {
-            return courseRepository.findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(name, category);
+            courses = courseRepository.findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(name, category);
+        } else if (hasName) {
+            courses = courseRepository.findByNameContainingIgnoreCase(name);
+        } else if (hasCategory) {
+            courses = courseRepository.findByCategoryContainingIgnoreCase(category);
+        } else {
+            courses = courseRepository.findAll();
         }
 
-        if (hasName) {
-            return courseRepository.findByNameContainingIgnoreCase(name);
-        }
-
-        if (hasCategory) {
-            return courseRepository.findByCategoryContainingIgnoreCase(category);
-        }
-
-        return courseRepository.findAll();
+        return new CourseListResponseDTO(courses);
     }
 }
