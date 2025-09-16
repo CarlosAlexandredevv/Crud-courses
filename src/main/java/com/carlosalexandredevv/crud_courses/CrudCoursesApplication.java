@@ -2,8 +2,10 @@ package com.carlosalexandredevv.crud_courses;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories
 public class CrudCoursesApplication {
 
 	public static void main(String[] args) {
